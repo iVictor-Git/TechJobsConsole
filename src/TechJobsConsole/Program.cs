@@ -63,7 +63,8 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -118,7 +119,42 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            /* Output should look like this
+            *****
+            position type: Data Scientist / Business Intelligence
+            name: Sr. IT Analyst (Data/BI)
+            employer: Bull Moose Industries
+            location: Saint Louis
+            core competency: Statistical Analysis
+            *****
+            * 
+            * First thing is first, we've passed in a LIST class object called someJobs
+            * Need to iterate through every dictionary inside list
+            * Then I need to iterate through every key:value pair in list
+            * 
+            * Requires a nested loop
+            * 
+            * Loop through List items (dictionary)
+            *   on every dictionary, loop through key:values
+            */
+
+            if (someJobs.Count != 0)
+            {
+                foreach (Dictionary<string, string> jobs in someJobs)
+                {
+                    Console.WriteLine("*******");
+                    foreach (KeyValuePair<string, string> job in jobs)
+                    {
+                        Console.WriteLine(String.Format("{0}: {1}", job.Key, job.Value));
+                    }
+                }
+                Console.WriteLine("*******");
+            }
+            else
+            {
+                Console.WriteLine("No job postings");
+            }
+            
         }
     }
 }

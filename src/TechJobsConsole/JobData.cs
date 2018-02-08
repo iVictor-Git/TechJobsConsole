@@ -138,5 +138,38 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
+
+        public static List<Dictionary<string, string>> FindByValue(string searchWord)
+        {
+            /*
+             * The method that you write should not contain duplicate jobs. So, for example, if a listing has position type 
+             * "Web - Front End" and name "Front end web dev" then searching for "web" should not include the listing twice.
+             * As with PrintJobs, you should write your code in a way that if a new column is added to the data, your code will
+             * automatically search the new column as well. You should not write code that calls FindByColumnAndValue once for 
+             * each column. Rather, utilize loops and collection methods as you did above. You should, on the other hand, read 
+             * and understand FindByColumnAndValue, since your code will look similar in some ways.
+             * 
+             * 
+             */
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobList = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> jobs in AllJobs)
+            { 
+                foreach (KeyValuePair<string, string> job in jobs)
+                {
+                    if (job.Value.ToLower().Contains(searchWord.ToLower()))
+                    {
+                        jobList.Add(jobs);
+                        break;
+                    }
+
+                }
+            }
+
+            return jobList;
+        }
     }
 }
